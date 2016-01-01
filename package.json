@@ -1,0 +1,14 @@
+{
+  "name": "tedxV1",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "react-native start"
+  },
+  "dependencies": {
+    "moment": "^2.10.6",
+    "react-native": "^0.17.0",
+    "react-native-accordion": "^0.2.2",
+    "react-native-parallax-view": "^2.0.3"
+  }
+}

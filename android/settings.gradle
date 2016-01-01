@@ -1,0 +1,3 @@
+rootProject.name = 'tedxV1'
+
+include ':app'
