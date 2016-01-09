@@ -5,12 +5,13 @@ var {
     StyleSheet,
     Text,
     ListView,
-    PixelRatio,
     TouchableHighlight,
     View
     } = React;
 
-var MainScreen = require('./MainScreen');
+var videoList = require('../video/videoList');
+var TopicsView = require('./Topics');
+var styles = require('./style');
 
 var TOPICS = [
     {name:'Sports'},{name:'Entertainment'}, {name:'Music'},{name:'Science'},
@@ -47,11 +48,26 @@ var TopicsListView = React.createClass({
         this.setState({filter:topic.name.toLowerCase()});
 
         this.props.navigator.push({
-            title: topic.name,
-            component: MainScreen,
+            title: topic.name + ' | ' +this.props.city + (this.props.year ? ' \'' + this.props.year.substr(2,2): ''),
+            component: videoList,
             passProps: {
                 filter: topic.name.toLowerCase(),
-            }
+            },
+            leftButtonTitle: '< Mestá',
+            onLeftButtonPress: () => {
+                this.props.navigator.popN(3);
+            },
+            rightButtonTitle: 'Témy',
+            onRightButtonPress: () => {
+                this.props.navigator.push({
+                    title: "Témy",
+                    component: TopicsView,
+                    passProps: {
+                      navigator: this.props.navigator,
+                      city: this.props.city,
+                      year: this.props.year,
+                    },
+                });},
         });
     },
 
@@ -75,24 +91,6 @@ var NavButton = React.createClass({
     }
 });
 
-var styles = StyleSheet.create({
 
-    container: {
-        flex: 1,
-    },
-    button: {
-        backgroundColor: 'white',
-        padding: 9,
-        borderBottomWidth: 1 / PixelRatio.get(),
-        borderBottomColor: '#CDCDCD',
-    },
-    buttonText: {
-        fontSize: 17,
-        fontWeight: '500',
-        marginTop: 5,
-        padding: 7,
-        marginLeft: 55,
-    },
-});
 
 module.exports = TopicsListView;

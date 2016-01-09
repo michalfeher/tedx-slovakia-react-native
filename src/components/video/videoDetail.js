@@ -5,6 +5,7 @@ var moment = require('moment');
 var React = require('react-native');
 var Accordion = require('react-native-accordion');
 var ParallaxView = require('react-native-parallax-view');
+var styles = require('./style.js');
 
 var {
     Text,
@@ -107,48 +108,6 @@ var ViewVideo = React.createClass({
     }
 });
 
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: 'white',
-        flexDirection: 'column',
-        padding: 20
-    },
-    centerText: {
-        textAlign: 'center',
-        fontWeight: 'bold',
-        fontSize: 20,
-        marginTop: 100,
-        color: 'white',
-    },
-    noResultsText: {
-        marginBottom:0,
-        color: '#000000',
-    },
-    frame: {
-        marginTop:20,
-        height:450,
-        flex: 1,
-        width: window.width,
-    },
-    scrollContainer: {
-      flex: 1,
-      width: window.width,
-      height:700,
-      backgroundColor: 'white',
-    },
-    image: {
-      width: 320,
-      height: 180,
-      marginBottom: 20,
-    },
-    showMore: {
-      fontWeight: 'bold',
-      marginTop:10
-    },
-    parallax: {
-      marginTop:50,
-    }
-});
+
 
 module.exports = ViewVideo;

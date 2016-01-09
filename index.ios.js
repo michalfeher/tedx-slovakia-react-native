@@ -7,23 +7,21 @@ var {
     StyleSheet,
     } = React;
 
-var MainScreen = require('./MainScreen');
-var TopicsView = require('./Topics');
-var Menu = require('./menu');
+var MainScreen = require('./src/components/video/videoList');
+var TopicsView = require('./src/components/topics/Topics');
+var Menu = require('./src/components/menu/menu');
 var SideMenu = require('react-native-side-menu');
-var Cities = require('./cities');
-var Years = require('./years');
+var Cities = require('./src/components/cities/cities');
 
 var ROUTES = {
   homepage: tedxV1,
-  years: Years,
   cities: Cities
 };
 
 var tedxV1 = React.createClass({
     getInitialState: function() {
       return {
-        isOpen: false
+        isOpen: false,
       };
     },
     toggle: function() {
@@ -53,24 +51,16 @@ var tedxV1 = React.createClass({
     render: function() {
         return (
           <SideMenu
-            menu={<Menu navigator={this.refs.nav}/>}
+            menu={<Menu navigator={this.refs.nav} toggle={this.toggle} setYear={this.setYear} isOpen={this.state.isOpen}/>}
             isOpen={this.state.isOpen}
+            ref="sidemenu"
             onChange={(isOpen) => this.updateMenuState(isOpen)}>
               <NavigatorIOS
                   ref="nav"
                   style={styles.container}
                   initialRoute={{
-                      title: 'Top videá',
                       component: Cities,
-                      // rightButtonTitle: 'Témy',
-                      // onRightButtonPress: () => {
-                      //     this.refs.nav.navigator.push({
-                      //         title: "Topics",
-                      //         component: TopicsView,
-                      //         rightButtonTitle: 'Cancel',
-                      //         onRightButtonPress: () => {this.refs.nav.navigator.pop();},
-                      //         passProps: {navigator: this.refs.nav.navigator},
-                      //     });},
+                      title: '',
                       leftButtonTitle: 'Ročníky',
                       onLeftButtonPress: () => {
                           this.toggle();
@@ -79,18 +69,6 @@ var tedxV1 = React.createClass({
               />
           </SideMenu>
         );
-        // return (
-        //   <SideMenu
-        //     menu={<Menu navigator={this.refs.nav}/>}
-        //     isOpen={this.state.isOpen}
-        //     onChange={(isOpen) => this.updateMenuState(isOpen)}>
-        //       <NavigatorIOS
-        //           ref="nav"
-        //           style={styles.container}
-        //           initialRoute={{name: 'cities'}}
-        //       />
-        //   </SideMenu>
-        // );
     }
 });
 

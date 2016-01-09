@@ -11,8 +11,9 @@ var {
     } = React;
 var TimerMixin = require('react-timer-mixin');
 
-var VideoRow = require('./VideoRow');
-var VideoWebView = require('./VideoWebView');
+var VideoRow = require('./videoRow');
+var videoDetail = require('./videoDetail');
+var styles = require('./style');
 
 var BASE_URL = 'http://newsblock.io/api/';
 
@@ -94,7 +95,7 @@ console.log(video);
     var domain = 'https://www.youtube.com';
     this.props.navigator.push({
         title: video.title,
-        component: VideoWebView,
+        component: videoDetail,
         passProps: {
             video: video,
             url: domain +'/embed/'+ video.snippet.resourceId.videoId +'?autoplay=1' // domain+'/watch?v='+video.videoId
@@ -135,7 +136,7 @@ render: function() {
         />;
 
         return (
-            <View style={styles.container}>
+            <View style={styles.videoListContainer}>
                 <View style={[styles.separator, {marginTop: 64}]} />
                 {results}
             </View>
@@ -179,42 +180,13 @@ var NoVideos = React.createClass({
         }
 
         return (
-            <View style={[styles.container, styles.centerText]}>
+            <View style={[styles.container]}>
                 <Text style={styles.noResultsText}>{text}</Text>
             </View>
         );
     }
 });
 
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: 'white',
-    },
-    centerText: {
-        alignItems: 'center',
-    },
-    noResultsText: {
-        marginTop: 80,
-        color: '#888888',
-    },
-    separator: {
-        height: 1,
-        backgroundColor: '#eeeeee',
-    },
-    spinner: {
-        width: 30,
-    },
-    scrollSpinner: {
-        marginVertical: 20,
-    },
-    wrapper: {
-        height: 60,
-        marginTop: 10,
-    },
-    loading: {
-        height: 20,
-    },
-});
+
 
 module.exports = MainScreen;
